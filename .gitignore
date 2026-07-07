@@ -1,0 +1,52 @@
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Database and local data
+*.db
+*.sqlite3
+*.sqlite
+*.log
+
+# Test and coverage output
+.pytest_cache/
+.coverage
+htmlcov/
+.coverage.*
+
+# Packaging / build artifacts
+build/
+dist/
+*.egg-info/
+*.egg
+
+# Node / frontend artifacts
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/.cache/
+
+# IDE and OS noise
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Project runtime storage
+storage_data/uploads/
+storage_data/processed/
+storage_data/cache/
