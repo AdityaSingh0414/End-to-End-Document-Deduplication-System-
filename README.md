@@ -1,6 +1,6 @@
-# Enterprise AI Document Intelligence System
+# Document Deduplication System
 
-A high-performance document processing, character recognition (OCR), semantic search, and storage deduplication platform built with a FastAPI backend and a Vite React + TS glassmorphic frontend.
+A document deduplication and semantic search platform with OCR, duplicate detection, and a React-based dashboard.
 
 ---
 
@@ -8,20 +8,20 @@ A high-performance document processing, character recognition (OCR), semantic se
 
 ### Backend & AI Processing Engine
 - **Core API**: FastAPI (ASGI) with modular routers
-- **Database Engine**: SQLAlchemy with SQLite out-of-the-box (zero-config SQL support)
-- **Vector Search Engine**: FAISS (Facebook AI Similarity Search) flat indexes
-- **Text & Layout Parsers**: PDF digital text extraction via `pypdf`, DOCX tables/text extraction via `python-docx`
-- **OCR Engine**: Simulated text-segment layout scanner with integration-ready hooks for EasyOCR & PaddleOCR
-- **Deduplication Engine**: Multi-metric classifier checks (Exact SHA-256 Hashes, Jaccard Keyword overlaps, Vector Cosine similarities)
-- **Background Worker**: Celery task structure with auto-eager synchronous fallback (keeps ingestion functional without Redis)
-- **Real-Time Notification**: ASGI WebSocket broadcast channels
+- **Database Engine**: SQLAlchemy with local SQLite support
+- **Vector Search Engine**: FAISS-style vector search integration
+- **Text Parsers**: PDF and DOCX extraction support
+- **OCR Engine**: OCR pipeline with simulated metadata and integration hooks
+- **Deduplication Engine**: Multi-metric duplicate detection using hashes, keyword similarity, and semantic similarity
+- **Background Worker**: Celery task structure with optional Redis integration
+- **Realtime**: WebSocket support for API notifications
 
 ### Frontend Dashboard Client
-- **Framework**: React + TypeScript scaffolded via Vite
-- **State Management**: Redux Toolkit (Auth and Document pools)
-- **Visual styling**: Custom glassmorphism variables (CSS layout styling, hover micro-animations)
-- **Data Visualizations**: Recharts charting reports (format, status, and language percentages)
-- **Icons**: Lucide Icons library
+- **Framework**: React + TypeScript + Vite
+- **State Management**: Redux Toolkit
+- **Visual Styling**: Glassmorphism UI design
+- **Data Visualization**: Recharts charts and analytics panels
+- **Icons**: Lucide Icons
 
 ---
 
@@ -29,84 +29,106 @@ A high-performance document processing, character recognition (OCR), semantic se
 
 ```
 ├── backend/
-│   ├── api/                   # Auth (JWT), Ingestion, Semantic Search, Deduplication, and Analytics routes
-│   ├── config/                # Settings loaders (defaults to local SQLite in development)
-│   ├── core/                  # Security (direct bcrypt hashing), Exceptions, Logging formatter
-│   ├── database/              # session connections, base ORM model class, database models
-│   ├── middleware/            # request-timing logging middlewares
-│   ├── storage/               # Abstract filesystem storage interface (LocalStorage)
-│   ├── websocket/             # WebSocket connections and broadcast manager
-│   ├── workers/               # Celery app configuration and background task runner
-│   └── main.py                # FastAPI boot entry point
-│
-├── ai/
-│   ├── ocr/                   # PDF/Word text extractors, simulated OCR scans pipeline
-│   ├── vector_search/         # Embedding generators, local FAISS vector store manager
-│   └── machine_learning/      # duplicate similarity classifier checks (hash, Jaccard, semantic)
+│   ├── api/                   # FastAPI routers for auth, upload, search, duplicates, analytics, recommendations
+│   ├── app/                   # Backend application and dependency wiring
+│   ├── ai/                    # AI processing layers for OCR, embeddings, and ML models
+│   ├── config.py              # Pydantic settings and environment configuration
+│   ├── database/              # SQLAlchemy session, base classes, models, and seed script
+│   ├── models/                # ORM model definitions
+│   ├── websocket/             # WebSocket router and manager
+│   ├── workers/               # Celery app configuration and background tasks
+│   ├── utils/                 # Logging, security, exceptions, helpers
+│   └── main.py                # FastAPI application entry point
 │
 ├── frontend/                  # React Vite Single Page App
-│   ├── public/                # Web manifest, icons
+│   ├── public/                # Static assets and icons
 │   ├── src/
-│   │   ├── app/               # Root App, MainLayout container shell, Router paths
-│   │   ├── components/        # ui widgets
-│   │   ├── pages/             # Login, Dashboard, UploadCenter, OCRStudio, DuplicateCenter, SemanticSearch, AIChat, Analytics, VectorDatabase, Settings
-│   │   ├── services/          # HTTP API client services (auth, upload, search, duplicate, analytics)
-│   │   ├── store/             # Redux state slices (authSlice, documentSlice)
-│   │   ├── lib/               # axios base config, websocket auto-reconnector helper
-│   │   └── styles/            # globals.css, animations.css (glassmorphism design tokens)
+│   │   ├── app/               # Root app layout and routing
+│   │   ├── components/        # UI components
+│   │   ├── pages/             # Login, Dashboard, Upload, OCR, Duplicate Center, Search, Chat, Analytics
+│   │   ├── services/          # API client service modules
+│   │   ├── store/             # Redux slices and store configuration
+│   │   ├── lib/               # Utilities and axios configuration
+│   │   └── styles/            # Global styles and theme tokens
 │   └── package.json
 │
-├── doc_intelligence.db        # In-memory/SQLite file containing schemas and tables
-├── run.py                     # Root orchestrator script
-└── task.md                    # Task tracker document
+├── doc_intelligence.db        # SQLite database file for local development
+├── run.py                     # Root orchestrator script for backend + frontend
+└── requirements.txt           # Python dependencies
 ```
 
 ---
 
 ## Operating Instructions
 
+### GitHub Push Checklist
+1. **Keep secrets out of version control**
+   - Do not commit `.env`, API keys, passwords, tokens, or private credentials.
+   - This repo includes `.env.example` for safe local setup.
+2. **Use `.gitignore` correctly**
+   - The project already ignores `venv/`, `node_modules/`, build outputs, caches, logs, and editor folders.
+3. **Avoid large or private files**
+   - Do not commit datasets, trained models, backups, or other large generated files.
+4. **Include a LICENSE**
+   - A `LICENSE` file is included in the repo to clarify usage terms.
+5. **Review before publishing**
+   - Confirm no sensitive or personal files are present and that only source code and necessary config is committed.
+
 ### Prerequisites
 1. Python 3.10+
 2. Node.js 18+
 
-### Setup and Ingestion
-
-1. **Backend Database Setup**:
-   Ensure you have configured the local virtual environment and seeded the SQLite tables:
+### Backend Setup
+1. Activate the local Python virtual environment:
    ```bash
-   # Activate virtual env (Windows)
    .\venv\Scripts\activate
-   
-   # Seed tables and admin account
-   python -m backend.database.init_db
+   ```
+2. Install the Python dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. Seed the database and create the default admin user:
+   ```bash
+   python -m backend.database.seed
    ```
 
-2. **Frontend Packages**:
-   Install Vite node dependencies:
+### Frontend Setup
+1. Install frontend dependencies:
    ```bash
    cd frontend
    npm install
    cd ..
    ```
 
-### Start System Concurrently
-Run the master orchestrator script from the root workspace folder:
+### Start the Application
+From the repository root, run:
 ```bash
 python run.py
 ```
-This spawns:
-- **FastAPI Backend Server**: [http://127.0.0.1:8000](http://127.0.0.1:8000)
-- **Vite React Dev Server**: [http://localhost:5173](http://localhost:5173) (or next available port)
+This starts:
+- **FastAPI backend** at `http://127.0.0.1:8000`
+- **Vite frontend** at `http://localhost:5173`
 
-### Run Exploratory ML/CV pipeline Demos
-To run a command-line demonstration of the system's underlying NLP, Computer Vision, OCR, and Jaccard vs. Semantic similarity checks, run:
-```bash
-python experiments/pipeline_demo.py
-```
+If you prefer to run backend and frontend separately:
+- Backend only:
+  ```bash
+  python backend/main.py
+  ```
+- Frontend only:
+  ```bash
+  cd frontend
+  npm run dev
+  ```
 
 ---
 
 ## Default Admin Credentials
-To log into the administrator controls, use the seeded system operator profile:
 - **Email**: `admin@enterprise.ai`
 - **Password**: `admin123`
+
+---
+
+## Notes
+- The backend uses `backend.config.Settings` to configure local paths, database URLs, and environment settings.
+- The frontend is a Vite React app and can be started independently if needed.
+- There is no `experiments/` directory in this repo, so the `experiments/pipeline_demo.py` command is not available.

@@ -1,6 +1,6 @@
 # Deployment Guide
 
-Follow these steps to deploy the AI Document Intelligence System.
+Follow these steps to deploy the Document Deduplication System.
 
 ## Requirements
 - Python 3.10+

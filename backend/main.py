@@ -26,7 +26,7 @@ logger = get_logger("app_main")
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Startup actions
-    logger.info("Starting up Enterprise AI Document Intelligence Backend...")
+    logger.info("Starting up Document Deduplication System Backend...")
     try:
         # Create database tables automatically if they do not exist
         logger.info("Initializing database schema...")
@@ -37,13 +37,13 @@ async def lifespan(app: FastAPI):
     
     yield
     # Shutdown actions
-    logger.info("Shutting down Enterprise AI Document Intelligence Backend...")
+    logger.info("Shutting down Document Deduplication System Backend...")
 
 
 # Initialize FastAPI app
 app = FastAPI(
     title=settings.PROJECT_NAME,
-    description="Enterprise document deduplication, semantic search, OCR, and document layout analysis system.",
+    description="Document Deduplication System for semantic search, OCR, and document layout analysis.",
     version="1.0.0",
     lifespan=lifespan
 )

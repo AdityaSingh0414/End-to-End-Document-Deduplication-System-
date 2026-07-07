@@ -54,11 +54,8 @@ const Login: React.FC = () => {
             <Database size={24} color="#fff" />
           </div>
           <h2 style={{ fontSize: '1.6rem', fontWeight: 800, color: '#fff', fontFamily: 'Outfit' }}>
-            ANTIGRAVITY AI
+            Document Deduplication System
           </h2>
-          <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
-            Enterprise AI Document Intelligence
-          </p>
         </div>
 
         {/* Info alerts */}

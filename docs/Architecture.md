@@ -1,6 +1,6 @@
 # System Architecture
 
-The AI Document Intelligence System is built as a modular application with top-level root modules.
+The Document Deduplication System is built as a modular application with top-level root modules.
 
 ## Architecture Layout
 

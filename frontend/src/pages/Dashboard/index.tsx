@@ -104,7 +104,7 @@ const Dashboard: React.FC = () => {
       {/* Welcome header */}
       <div>
         <h1 style={{ fontSize: '2rem', marginBottom: '8px', color: '#fff' }}>Dashboard Overview</h1>
-        <p style={{ color: 'var(--text-secondary)' }}>Welcome to the Enterprise AI Document Intelligence portal. Here's your workspace status.</p>
+        <p style={{ color: 'var(--text-secondary)' }}>Welcome to the Document Deduplication System portal. Here's your workspace status.</p>
       </div>
 
       {/* Grid statistics */}

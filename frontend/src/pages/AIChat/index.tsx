@@ -26,7 +26,7 @@ const AIChat: React.FC = () => {
     {
       id: 'welcome',
       sender: 'bot',
-      text: 'Hello! I am your AI Document Intelligence Assistant. Ask me anything about your ingested documents, or select a specific file to chat with directly.'
+      text: 'Hello! I am your Document Deduplication System Assistant. Ask me anything about your ingested documents, or select a specific file to chat with directly.'
     }
   ]);
   const [input, setInput] = useState('');
@@ -101,7 +101,7 @@ const AIChat: React.FC = () => {
       {
         id: 'welcome',
         sender: 'bot',
-        text: 'Hello! I am your AI Document Intelligence Assistant. Ask me anything about your ingested documents, or select a specific file to chat with directly.'
+        text: 'Hello! I am your Document Deduplication System Assistant. Ask me anything about your ingested documents, or select a specific file to chat with directly.'
       }
     ]);
   };

@@ -15,7 +15,7 @@ os.environ["SENTENCE_TRANSFORMERS_HOME"] = str(BASE_DIR / "storage_data" / "cach
 
 class Settings(BaseSettings):
     # App Settings
-    PROJECT_NAME: str = "Enterprise AI Document Intelligence"
+    PROJECT_NAME: str = "Document Deduplication System"
     API_V1_STR: str = "/api/v1"
     ENV: str = "development"
     DEBUG: bool = True

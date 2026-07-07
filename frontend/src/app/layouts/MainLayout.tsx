@@ -64,11 +64,8 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
           </div>
           <div>
             <h2 style={{ fontSize: '1.1rem', fontWeight: 800, fontFamily: 'Outfit', background: 'linear-gradient(to right, #fff, var(--text-secondary))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-              ANTIGRAVITY
+              Document Deduplication System
             </h2>
-            <span style={{ fontSize: '0.65rem', letterSpacing: '0.05em', color: 'var(--accent-pink)', textTransform: 'uppercase', fontWeight: 600 }}>
-              AI Intelligence
-            </span>
           </div>
         </div>
 

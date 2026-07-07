@@ -40,7 +40,7 @@ def start_orchestrator():
     signal.signal(signal.SIGTERM, terminate_all_processes)
 
     print("==============================================================")
-    print("      ENTERPRISE AI DOCUMENT INTELLIGENCE RUNNER SYSTEM       ")
+    print("      DOCUMENT DEDUPLICATION SYSTEM RUNNER SYSTEM             ")
     print("==============================================================")
     
     # 1. Start Backend FastAPI server

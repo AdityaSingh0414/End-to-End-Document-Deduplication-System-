@@ -114,7 +114,7 @@ def run_ocr_pipeline(file_path: str, language: str = "en") -> str:
         signature = "[Signature Detected] Verified by Administrator"
         stamp = "[Stamp Detected: \"CONFIDENTIAL / DO NOT COPY\"]"
 
-    mock_ocr = f"""[Enterprise AI Scanned Document Intelligence OCR Output]
+    mock_ocr = f"""[Document Deduplication System OCR Output]
 Document Scan Source: {filename}
 Timestamp: {os.path.getmtime(file_path) if os.path.exists(file_path) else "N/A"}
 
